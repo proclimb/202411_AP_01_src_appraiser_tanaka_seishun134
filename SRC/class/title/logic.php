@@ -174,6 +174,7 @@ function subTitlePage1()
 //
 // タイトル管理削除処理
 //
+
 function subFTitleDelete()
 {
     $conn = fnDbConnect();
@@ -187,14 +188,17 @@ function subFTitleDelete()
             $sql = fnSqlFTitleDelete($row['DOCNO']);
             $result = mysqli_query($conn, $sql);
         }
+        $_REQUEST['act'] = 'fTitleSearch'; // ← 追加
+        subFTitle(); // ← 追加
     } else {
         $sql = fnSqlFTitleDelete($DocNo);
         $res = mysqli_query($conn, $sql);
+        subTitlePage1(); // ← 追加
     }
-
-    $_REQUEST['act'] = 'fTitleSearch';
-    subFTitle();
+    // ここにあった２行は削除
 }
+
+
 
 //
 // 画面間引継ぎ情報
